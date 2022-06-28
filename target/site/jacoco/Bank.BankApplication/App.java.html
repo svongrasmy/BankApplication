@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BankApplication</a> &gt; <a href="index.source.html" class="el_package">Bank.BankApplication</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package Bank.BankApplication;
+
+import connectionUtil.ConnectionUtil;
+import service.AccountService;
+import service.UserService;
+import models.Role;
+import models.Users;
+
+import java.util.Scanner;
+
+
+
+
+
+<span class="nc" id="L15">public class App {</span>
+	
+<span class="nc" id="L17">	static Scanner scan = new Scanner(System.in);</span>
+  public static void main(String[] args) {
+	  //ConnectionUtil.getConnection();
+	 
+ 
+    // Let's just fetch account to test
+<span class="nc" id="L23">    AccountService as = new AccountService();</span>
+<span class="nc" id="L24">    as.viewAllAccounts();</span>
+<span class="nc" id="L25">    startup();</span>
+<span class="nc" id="L26">  }</span>
+  
+  public static void startup() {
+	  String username;
+	  String password;
+<span class="nc" id="L31">	  UserService us = new UserService();</span>
+<span class="nc" id="L32">	  System.out.println(&quot;Welcome to Steven's Bank&quot;);</span>
+<span class="nc" id="L33">	  System.out.println(&quot;Please define your role:\n&quot;</span>
+			  			+ &quot;Push 1 if you are a existing Customer.\n&quot; 
+			  			+ &quot;Push 2 if you would like to register for a new account. \n&quot; 
+			  			+ &quot;Push 3 if you are a Employee. \n&quot;
+			  			+ &quot;Push 4 if you are a Bank Admin.&quot;);
+<span class="nc" id="L38">	  int selection = scan.nextInt();</span>
+	  
+<span class="nc bnc" id="L40" title="All 2 branches missed.">	  if (selection == 1) {</span>
+<span class="nc" id="L41">			  System.out.println(&quot;Please enter your username.&quot;);</span>
+<span class="nc" id="L42">			  username = scan.next();</span>
+<span class="nc" id="L43">			  System.out.println(&quot;Please enter your password.&quot;);</span>
+<span class="nc" id="L44">			  password = scan.next();</span>
+			  
+			
+<span class="nc bnc" id="L47" title="All 2 branches missed.">		  } else if(selection == 2) {</span>
+<span class="nc" id="L48">			  System.out.println(&quot;Please enter a username.&quot;);</span>
+<span class="nc" id="L49">			   username = scan.next();</span>
+<span class="nc" id="L50">			  System.out.println(&quot;Please enter a password.&quot;);</span>
+<span class="nc" id="L51">			  password = scan.next();</span>
+			  
+<span class="nc" id="L53">			  Users u = new Users(username, password, Role.Customer, null);</span>
+			  
+			
+			  
+<span class="nc" id="L57">			  us.register(u);</span>
+		  }
+<span class="nc" id="L59">	  }</span>
+  
+
+  }
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

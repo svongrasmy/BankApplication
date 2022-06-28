@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BankApplication</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package service;
+
+import dao.IUserDao;
+import dao.UserDao;
+import exceptions.RegisterUserFailedException;
+import models.Users;
+
+<span class="fc" id="L8">public class UserService {</span>
+	
+	// Dependency Injection
+<span class="fc" id="L11">	public IUserDao udao = new UserDao();</span>
+	
+	public Users register(Users u) {
+		
+<span class="fc" id="L15">		System.out.println(&quot;Returning user....&quot;);</span>
+		
+		// Let's make sure the registering user has an id of 0 before trying to register
+		// This is just an additional layer of data validation
+		
+<span class="fc bfc" id="L20" title="All 2 branches covered.">		if(u.getId()!=0) {</span>
+<span class="fc" id="L21">			throw new RegisterUserFailedException(&quot;User not valid to register because Id was not 0&quot;);</span>
+			
+		}
+		// If the id is 0, we can call the dao to create a new objects
+<span class="fc" id="L25">		int generateId = udao.insert(u);</span>
+		
+		// Lets do some checking before finishing
+		
+<span class="pc bpc" id="L29" title="1 of 4 branches missed.">		if(generateId != -1 &amp;&amp; generateId != u.getId()) {</span>
+<span class="fc" id="L30">			u.setId(generateId);</span>
+			
+		}else {
+<span class="fc" id="L33">			throw new RegisterUserFailedException(&quot;User's Id was neither -1 or did not change after insertion&quot;);</span>
+		}
+<span class="fc" id="L35">		System.out.println(&quot;Successfully registered user with the Id of &quot; + u.getId());</span>
+		
+<span class="fc" id="L37">		return u;</span>
+	}
+public Users login(String username, String password) {
+		
+		// We now need to call upon our userDAO to get us some information about the user with this specific username
+		
+<span class="fc" id="L43">		Users returnedUser = udao.findByUsername(username);</span>
+		
+		
+		
+		
+		// Check to see if returned password matches the entered password
+		
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">		if (returnedUser.getPassword().equals(password)) {</span>
+			
+<span class="fc" id="L52">			System.out.println(&quot;Successfully Logged in!&quot;);</span>
+			
+<span class="fc" id="L54">			System.out.println(&quot;Reached the inside of the if statement&quot;);</span>
+<span class="fc" id="L55">			return returnedUser;</span>
+		}
+		
+		// Otherwise the password is not equal
+<span class="nc" id="L59">		return null;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

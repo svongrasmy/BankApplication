@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+BankApplication,models,Account,183,0,16,0,50,0,22,0,14,0
+BankApplication,models,Users,213,38,36,0,50,16,27,7,9,7
+BankApplication,models,Role,0,34,0,0,0,4,0,1,0,1
+BankApplication,dao,AccountDao,69,0,2,0,24,0,8,0,7,0
+BankApplication,dao,UserDao,127,3,4,0,40,1,8,1,6,1
+BankApplication,Bank.BankApplication,App,74,0,4,0,23,0,6,0,4,0
+BankApplication,connectionUtil,ConnectionUtil,45,0,4,0,18,0,4,0,2,0
+BankApplication,service,AccountService,36,0,2,0,9,0,4,0,3,0
+BankApplication,service,UserService,2,71,2,6,1,16,2,5,0,3
+BankApplication,exceptions,RegisterUserFailedException,0,4,0,0,0,2,0,1,0,1

@@ -8,7 +8,7 @@ import models.Users;
 public class UserService {
 	
 	// Dependency Injection
-	private IUserDao udao = new UserDao();
+	public IUserDao udao = new UserDao();
 	
 	public Users register(Users u) {
 		
@@ -35,6 +35,28 @@ public class UserService {
 		System.out.println("Successfully registered user with the Id of " + u.getId());
 		
 		return u;
+	}
+public Users login(String username, String password) {
+		
+		// We now need to call upon our userDAO to get us some information about the user with this specific username
+		
+		Users returnedUser = udao.findByUsername(username);
+		
+		
+		
+		
+		// Check to see if returned password matches the entered password
+		
+		if (returnedUser.getPassword().equals(password)) {
+			
+			System.out.println("Successfully Logged in!");
+			
+			System.out.println("Reached the inside of the if statement");
+			return returnedUser;
+		}
+		
+		// Otherwise the password is not equal
+		return null;
 	}
 	
 }
