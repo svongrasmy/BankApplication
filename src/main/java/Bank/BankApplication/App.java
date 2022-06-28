@@ -6,13 +6,15 @@ import java.util.Scanner;
 
 
 public class App {
+	static Scanner scan = new Scanner(System.in);
   public static void main(String[] args) {
-	  ConnectionUtil.getConnection();
+	  //ConnectionUtil.getConnection();
+	 
     startup();
   }
   
   public static void startup() {
-	  Scanner scan = new Scanner(System.in);
+	 
 	  System.out.println("Welcome to Steven's Bank");
 	  System.out.println("Please define your role:\n"
 			  			+ "Push 1 if you are a Customer or wanting to become a new Customer. \n" 
@@ -25,6 +27,12 @@ public class App {
 				  			+ "Push 1 for Yes. \n" 
 				  			+ "Push 2 for No.");
 		  selection = scan.nextInt();
+		  if(selection == 1){
+			  System.out.println("Please enter a username.");
+			  String username = scan.next();
+			  System.out.println("Please enter a password.");
+			  String password = scan.next();
+		  }
 	  }
   }
 }
