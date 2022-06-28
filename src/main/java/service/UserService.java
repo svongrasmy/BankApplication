@@ -2,6 +2,7 @@ package service;
 
 import dao.IUserDao;
 import dao.UserDao;
+import exceptions.RegisterUserFailedException;
 import models.Users;
 
 public class UserService {
@@ -12,7 +13,28 @@ public class UserService {
 	public Users register(Users u) {
 		
 		System.out.println("Returning user....");
-		return null;
+		
+		// Let's make sure the registering user has an id of 0 before trying to register
+		// This is just an additional layer of data validation
+		
+		if(u.getId()!=0) {
+			throw new RegisterUserFailedException("User not valid to register because Id was not 0");
+			
+		}
+		// If the id is 0, we can call the dao to create a new objects
+		int generateId = udao.insert(u);
+		
+		// Lets do some checking before finishing
+		
+		if(generateId != -1 && generateId != u.getId()) {
+			u.setId(generateId);
+			
+		}else {
+			throw new RegisterUserFailedException("User's Id was neither -1 or did not change after insertion");
+		}
+		System.out.println("Successfully registered user with the Id of " + u.getId());
+		
+		return u;
 	}
 	
 }

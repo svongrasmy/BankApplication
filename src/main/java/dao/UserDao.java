@@ -56,6 +56,8 @@ public class UserDao implements IUserDao {
 				
 				System.out.println("We returned a user with id # " + id);
 				
+				return id;
+				
 			}
 			
 		} catch (SQLException e) {

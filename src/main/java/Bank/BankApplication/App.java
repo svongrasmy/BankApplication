@@ -1,11 +1,18 @@
 package Bank.BankApplication;
 
 import connectionUtil.ConnectionUtil;
+import service.UserService;
+import models.Role;
+import models.Users;
+
 import java.util.Scanner;
 
 
 
+
+
 public class App {
+	
 	static Scanner scan = new Scanner(System.in);
   public static void main(String[] args) {
 	  //ConnectionUtil.getConnection();
@@ -14,25 +21,38 @@ public class App {
   }
   
   public static void startup() {
-	 
+	  String username;
+	  String password;
+	  UserService us = new UserService();
 	  System.out.println("Welcome to Steven's Bank");
 	  System.out.println("Please define your role:\n"
-			  			+ "Push 1 if you are a Customer or wanting to become a new Customer. \n" 
-			  			+ "Push 2 if you are a Employee. \n" 
-			  			+ "Push 3 if you are a Bank Admin. \n");
+			  			+ "Push 1 if you are a existing Customer.\n" 
+			  			+ "Push 2 if you would like to register for a new account. \n" 
+			  			+ "Push 3 if you are a Employee. \n"
+			  			+ "Push 4 if you are a Bank Admin.");
 	  int selection = scan.nextInt();
 	  
 	  if (selection == 1) {
-		  System.out.println("Are you an existing Customer? \n" 
-				  			+ "Push 1 for Yes. \n" 
-				  			+ "Push 2 for No.");
-		  selection = scan.nextInt();
-		  if(selection == 1){
-			  System.out.println("Please enter a username.");
-			  String username = scan.next();
-			  System.out.println("Please enter a password.");
-			  String password = scan.next();
+			  System.out.println("Please enter your username.");
+			  username = scan.next();
+			  System.out.println("Please enter your password.");
+			  password = scan.next();
+			  
+			
+		  } else if(selection == 2) {
+			  System.out.println("Please enter your username.");
+			   username = scan.next();
+			  System.out.println("Please enter your password.");
+			  password = scan.next();
+			  
+			  Users u = new Users(username, password, Role.Customer, null);
+			  
+			
+			  
+			  us.register(u);
 		  }
 	  }
+  
+
   }
-}
+
