@@ -1,6 +1,7 @@
 package Bank.BankApplication;
 
 import connectionUtil.ConnectionUtil;
+import service.AccountService;
 import service.UserService;
 import models.Role;
 import models.Users;
@@ -17,6 +18,10 @@ public class App {
   public static void main(String[] args) {
 	  //ConnectionUtil.getConnection();
 	 
+ 
+    // Let's just fetch account to test
+    AccountService as = new AccountService();
+    as.viewAllAccounts();
     startup();
   }
   
@@ -40,9 +45,9 @@ public class App {
 			  
 			
 		  } else if(selection == 2) {
-			  System.out.println("Please enter your username.");
+			  System.out.println("Please enter a username.");
 			   username = scan.next();
-			  System.out.println("Please enter your password.");
+			  System.out.println("Please enter a password.");
 			  password = scan.next();
 			  
 			  Users u = new Users(username, password, Role.Customer, null);

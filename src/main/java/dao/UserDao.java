@@ -8,6 +8,7 @@ import java.sql.Types;
 import java.util.List;
 
 import connectionUtil.ConnectionUtil;
+import models.Role;
 import models.Users;
 
 public class UserDao implements IUserDao {
@@ -79,8 +80,46 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public Users findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		// Let's instantiate a user to hold our retrieved user
+		
+				Users u = new Users();
+				
+				// Try with Resources to connect and work with database
+				
+				try (Connection conn = ConnectionUtil.getConnection()){
+					
+					String sql = "SELECT * FROM users WHERE username = ?";
+					
+					PreparedStatement stmt = conn.prepareStatement(sql);
+					
+					stmt.setString(1, username);
+					
+					ResultSet rs;
+					
+					if ((rs = stmt.executeQuery()) != null) {
+						
+						// Move the cursor forward
+						rs.next();
+						
+						int id = rs.getInt("id");
+						String returnedUsername = rs.getString("username");
+						String password = rs.getString("pwd");
+						Role role = Role.valueOf(rs.getString("user_role"));
+						
+						u.setId(id);
+						u.setUsername(returnedUsername);
+						u.setPassword(password);
+						u.setRole(role);
+						
+					} 
+				} catch (SQLException e) {
+					System.out.println("SQL Exception Thrown - can't retrieve user from DB");
+					e.printStackTrace();
+				}
+				
+				
+				return u;
+		
 	}
 
 	@Override
