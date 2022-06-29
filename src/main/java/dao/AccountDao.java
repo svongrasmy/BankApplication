@@ -66,7 +66,7 @@ public class AccountDao implements IAccountDao{
 	}
 
 	@Override
-	public List<Account> findByOwnder(int accOwnerId) {
+	public List<Account> findByOwner(int accOwnerId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

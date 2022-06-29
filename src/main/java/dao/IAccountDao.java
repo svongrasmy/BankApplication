@@ -13,7 +13,7 @@ public interface IAccountDao {
 		
 		Account findById(int id);
 		
-		List<Account> findByOwnder(int accOwnerId);
+		List<Account> findByOwner(int accOwnerId);
 		
 		boolean update(Account a);
 		

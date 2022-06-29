@@ -45,7 +45,7 @@ public class ConnectionUtil {
 		
 		try {
 			conn = DriverManager.getConnection(url, username, password);
-			System.out.println("Established Connection to Database!");
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Cannot establish connection");

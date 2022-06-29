@@ -1,5 +1,7 @@
 package service;
 
+import java.util.concurrent.CountDownLatch;
+
 import dao.IUserDao;
 import dao.UserDao;
 import exceptions.RegisterUserFailedException;
@@ -44,19 +46,21 @@ public Users login(String username, String password) {
 		
 		
 		
-		
 		// Check to see if returned password matches the entered password
-		
+
 		if (returnedUser.getPassword().equals(password)) {
 			
 			System.out.println("Successfully Logged in!");
 			
-			System.out.println("Reached the inside of the if statement");
 			return returnedUser;
+		}else if (!returnedUser.getPassword().equals(password)) {
+			System.out.println("Password Incorrect.");
+			
 		}
 		
 		// Otherwise the password is not equal
-		return null;
-	}
+		
+	return null;
 	
+}
 }
